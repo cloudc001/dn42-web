@@ -60,4 +60,3 @@ Confirm the endpoint, hosting provider, and supported address families when arra
 
 - [DN42 Looking Glass](https://lg.dn42.cloudc.dev)
 - [Network monitoring](https://grafana.dn42.cloudc.dev/d/dn42-unified-observatory/dn42-unified-observatory)
-- [Service status](https://status.cloudc.dev)

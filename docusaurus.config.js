@@ -100,8 +100,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
                 href: 'https://lg.dn42.cloudc.dev',
               },
               {
-                label: 'Service status',
-                href: 'https://status.cloudc.dev',
+                label: 'Grafana monitoring',
+                href: 'https://grafana.dn42.cloudc.dev',
               },
               //{
               //  label: 'GitHub',
