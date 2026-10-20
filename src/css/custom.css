@@ -115,3 +115,19 @@ main[class*="docMainContainer"] .table-of-contents { font-size: .8rem; border-le
 }
 
 .ip-family-support { display: inline-block; white-space: nowrap; font-size: 1.15rem; font-weight: 600; letter-spacing: 0; color: #245750; }
+
+/* Center every cell in the published peering table, including the copy-key column. */
+.markdown table,
+.markdown table thead,
+.markdown table tbody,
+.markdown table tr,
+.markdown table th,
+.markdown table td { text-align: center !important; }
+.markdown table td:first-child { text-align: center !important; }
+.markdown table td .public-key-action { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.markdown table td .copy-public-key { margin-inline: auto; }
+
+/* Center all peer-table cells and copy buttons. */
+.markdown table, .markdown table th, .markdown table td { text-align: center !important; }
+.markdown table td .public-key-action { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.markdown table td .copy-public-key { margin-inline: auto; }
