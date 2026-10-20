@@ -1,0 +1,65 @@
+:root {
+  --ifm-color-primary: #0f766e;
+  --ifm-color-primary-dark: #115e59;
+  --ifm-color-primary-darker: #134e4a;
+  --ifm-color-primary-darkest: #103f3b;
+  --ifm-color-primary-light: #159487;
+  --ifm-color-primary-lighter: #21aa9b;
+  --ifm-color-primary-lightest: #45c2b3;
+  --ifm-font-family-base: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ifm-heading-font-family: var(--ifm-font-family-base);
+  --ifm-background-color: #f4f7fa;
+  --ifm-navbar-background-color: rgba(250, 252, 254, 0.94);
+  --ifm-footer-background-color: #101820;
+  --ifm-font-color-base: #17202a;
+  --ifm-color-emphasis-600: #5f6e7a;
+  --ifm-global-radius: 5px;
+  --ifm-code-font-size: 90%;
+  --docusaurus-highlighted-code-line-bg: rgba(15, 118, 110, 0.08);
+}
+
+html { scroll-behavior: smooth; }
+body { color: #17202a; line-height: 1.6; }
+.navbar { min-height: 64px; border-bottom: 1px solid rgba(217, 226, 234, 0.9); box-shadow: none; backdrop-filter: blur(14px); }
+.navbar__inner { max-width: 1184px; margin: 0 auto; }
+.navbar__brand { gap: 8px; }
+.navbar__logo { width: 32px; height: 32px; }
+.navbar__title { color: #17202a; font-size: 0.96rem; font-weight: 750; }
+.navbar__link { color: #5f6e7a; font-size: 0.91rem; }
+.navbar__link:hover, .navbar__link--active { color: #17202a; }
+.main-wrapper { min-height: calc(100vh - 64px); }
+.footer { padding: 1.5rem 0; }
+.footer__links { margin-bottom: 0.7rem; }
+.footer__title { color: #c9d4dc; font-size: 0.75rem; }
+.footer__link-item { color: #dce5eb; font-size: 0.85rem; }
+.footer__copyright { color: #91a0ac; font-size: 0.75rem; }
+.markdown { --ifm-heading-color: #17202a; }
+.markdown h1 { font-size: 2rem; }
+.markdown h2 { margin-top: 2rem; font-size: 1.35rem; }
+.markdown h3 { font-size: 1.08rem; }
+.markdown p, .markdown li { color: #34414d; }
+.docs-wrapper, .docMainContainer { background: #f4f7fa; }
+.docSidebarContainer { border-right: 1px solid #d9e2ea; background: #f4f7fa; }
+.docItemContainer { max-width: 960px; padding: 20px 38px 56px; }
+.theme-doc-sidebar-menu .menu__link { border-radius: 4px; color: #5f6e7a; }
+.theme-doc-sidebar-menu .menu__link:hover { color: #17202a; background: #e9eef3; }
+.theme-doc-sidebar-menu .menu__link--active:not(.menu__link--sublist) { color: #0f766e; background: #e7f4f2; font-weight: 700; }
+.theme-doc-markdown h1 { margin-bottom: 12px; font-size: 2.25rem; }
+.theme-doc-markdown h2 { margin-top: 2.4rem; padding-bottom: 0.45rem; border-bottom: 1px solid #d9e2ea; font-size: 1.3rem; }
+.theme-doc-markdown h3 { font-size: 1.05rem; }
+.theme-doc-markdown table { display: block; width: 100%; overflow-x: auto; border-collapse: collapse; background: #fff; }
+.theme-doc-markdown table th { color: #5f6e7a; background: #f7fafc; font-size: 0.78rem; white-space: nowrap; }
+.theme-doc-markdown table td, .theme-doc-markdown table th { padding: 0.65rem 0.8rem; border: 1px solid #d9e2ea; }
+.theme-doc-markdown table code { overflow-wrap: anywhere; font-size: 0.78rem; }
+.theme-doc-markdown blockquote { border-left-color: #0f766e; background: #fff; }
+.theme-doc-markdown .admonition-warning { border-color: #0f766e; background: #e7f4f2; }
+.theme-doc-markdown pre { overflow-x: auto; border: 1px solid #d9e2ea; border-radius: 5px; }
+
+@media (max-width: 996px) {
+  .docItemContainer { padding: 18px 24px 48px; }
+}
+
+@media (max-width: 600px) {
+  .docItemContainer { padding: 16px 8px 36px; }
+  .theme-doc-markdown h1 { font-size: 1.8rem; }
+}
