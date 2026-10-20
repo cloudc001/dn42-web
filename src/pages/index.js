@@ -26,8 +26,9 @@ export default function Home() {
           <h1>CloudC DN42 Network</h1>
           <p className={styles.lede}>Experimental overlay routing across a small, globally distributed network. Open peering for useful, well-maintained sessions.</p>
           <div className={styles.actions}>
-            <Link className={styles.primaryAction} to="/docs/peer">Peering details <span aria-hidden="true">↗</span></Link>
-            <a className={styles.secondaryAction} href="https://lg.dn42.cloudc.dev">Looking glass <span aria-hidden="true">↗</span></a>
+            <a className={styles.primaryAction} href="https://t.me/cloudc001bot">Auto peer <span aria-hidden="true">↗</span></a>
+
+            <Link className={styles.secondaryAction} to="/docs/peer">Peering details <span aria-hidden="true">↗</span></Link>
           </div>
         </div>
         <aside className={styles.identity} aria-label="Network identity">
@@ -40,7 +41,7 @@ export default function Home() {
       </div></header>
 
       <section className={styles.section} id="nodes"><div className="container">
-        <SectionHeading eyebrow="GLOBAL PRESENCE" title="Connected across regions">An illustrative view of CloudC’s DN42 points of presence, including the migrated AU node. Regional markers are not exact datacenter locations.</SectionHeading>
+        <SectionHeading eyebrow="GLOBAL PRESENCE" title="Connected across regions"></SectionHeading>
         <div className={styles.globeLayout}>
           <NetworkGlobe nodes={networkNodes} />
           <aside className={styles.communityPanel} aria-labelledby="communities-title">

@@ -10,6 +10,8 @@ AS4242423777 · Open peering policy · WireGuard
 
 For a new session, contact me on [Telegram](https://cloudc001.t.me) or by email at [cloud001@outlook.com](mailto:cloud001@outlook.com). Telegram is preferred; email replies are usually sent within 24 hours.
 
+For self-service peering, use the [CloudC001 Telegram bot](https://t.me/cloudc001bot).
+
 ## Network
 
 | ASN | DN42 IPv4 | DN42 IPv6 | Link-local |
