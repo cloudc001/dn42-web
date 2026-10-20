@@ -11,8 +11,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
-  organizationName: '', // Usually your GitHub org/user name.
-  projectName: '', // Usually your repo name.
+  organizationName: 'cloudc001', // Usually your GitHub org/user name.
+  projectName: 'dn42-web', // Usually your repo name.
 
   presets: [
     [
@@ -55,7 +55,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
           {to: '/#nodes', label: 'Nodes', position: 'left'},
           {to: '/#peering', label: 'Peering', position: 'left'},
           {href: 'https://lg.dn42.cloudc.dev', label: 'Looking glass', position: 'left'},
-          {href: 'https://status.cloudc.dev', label: 'Status', position: 'left'},
+          {href: 'https://grafana.dn42.cloudc.dev', label: 'Grafana', position: 'left'},
           //{
           //  href: 'https://github.com/facebook/docusaurus',
           //  label: 'GitHub',

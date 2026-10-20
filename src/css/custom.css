@@ -63,3 +63,55 @@ body { color: #17202a; line-height: 1.6; }
   .docItemContainer { padding: 16px 8px 36px; }
   .theme-doc-markdown h1 { font-size: 1.8rem; }
 }
+
+/* Documentation: full-width tables, balanced spacing, mobile overflow. */
+.markdown table { display: table; width: 100%; table-layout: auto; border-collapse: separate; border-spacing: 0; background: #fff; border: 1px solid #d9e2ea; border-radius: 10px; overflow: hidden; margin: 1.2rem 0 2rem; box-shadow: 0 4px 18px rgba(23,32,42,.04); }
+.markdown table th { background: #eaf3f2; color: #245750; font-size: .78rem; font-weight: 700; text-align: left; }
+.markdown table td, .markdown table th { padding: .85rem .9rem; border: 0; border-bottom: 1px solid #e4ebef; vertical-align: middle; }
+.markdown table tr:last-child td { border-bottom: 0; }
+.markdown table tr:nth-child(even) { background: #f7fafb; }
+.markdown table tbody tr:hover { background: #edf6f4; }
+.markdown table code { font-size: .79rem; white-space: normal; overflow-wrap: anywhere; background: #f0f5f6; border: 0; }
+.markdown table td:first-child { font-weight: 650; color: #0f766e; white-space: nowrap; }
+.markdown table th:first-child { min-width: 75px; }
+.markdown table td { font-size: .88rem; }
+@media (min-width: 997px) {
+  main[class*="docMainContainer"] .container { max-width: 1440px; padding-left: 2rem; padding-right: 2rem; }
+  main[class*="docMainContainer"] .col--9 { --ifm-col-width: 82%; max-width: 82%; flex-basis: 82%; }
+  main[class*="docMainContainer"] .col--3 { --ifm-col-width: 18%; max-width: 18%; flex-basis: 18%; }
+  div[class*="docItemContainer"] { max-width: none; }
+}
+@media (max-width: 600px) {
+  .markdown table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .markdown table td, .markdown table th { padding: .65rem .7rem; }
+  .markdown table code { overflow-wrap: normal; white-space: nowrap; }
+}
+.copy-public-key { display:inline-flex; align-items:center; gap:.4rem; padding:.45rem .7rem; border:1px solid #a9cec7; border-radius:7px; background:#edf7f4; color:#115e59; font:inherit; font-weight:600; white-space:nowrap; cursor:pointer; }
+.copy-public-key:hover { background:#dcefe9; border-color:#0f766e; }
+.copy-public-key:focus-visible { outline:2px solid #0f766e; outline-offset:3px; }
+.public-key-feedback { display:block; max-width:160px; font-size:.7rem; color:#42675f; }
+.public-key-feedback:empty { display:none; }
+.public-key-manual { width:160px; max-width:100%; font-family:monospace; }
+/* Peering documentation: centered editorial layout matching the homepage. */
+main[class*="docMainContainer"] { width: 100%; max-width: 100%; }
+main[class*="docMainContainer"] > .container { max-width: 1280px; margin-inline: auto; padding: 2.5rem 2rem 4rem; }
+main[class*="docMainContainer"] div[class*="docItemContainer"] { padding: 0; max-width: none; }
+main[class*="docMainContainer"] .markdown h1 { font-size: clamp(2.2rem, 4vw, 3.2rem); letter-spacing: -.045em; color: #17202a; margin-bottom: 1rem; }
+main[class*="docMainContainer"] .markdown h2 { margin-top: 2.8rem; padding-bottom: .65rem; border-bottom: 1px solid #d9e2ea; letter-spacing: -.02em; }
+main[class*="docMainContainer"] .markdown h1 + p { color: #0f766e; font-weight: 600; letter-spacing: .025em; }
+main[class*="docMainContainer"] .markdown > ul { padding-left: 1.4rem; }
+main[class*="docMainContainer"] .markdown li { margin-block: .45rem; }
+main[class*="docMainContainer"] .admonition { border-radius: 10px; box-shadow: none; }
+main[class*="docMainContainer"] .table-of-contents { font-size: .8rem; border-left: 1px solid #d9e2ea; }
+@media (min-width: 997px) {
+ main[class*="docMainContainer"] .col--9 { max-width: 84% !important; flex-basis: 84%; --ifm-col-width: 84%; }
+ main[class*="docMainContainer"] .col--3 { max-width: 16%; flex-basis: 16%; --ifm-col-width: 16%; }
+}
+@media (max-width: 996px) {
+ main[class*="docMainContainer"] > .container { padding: 1.5rem 1.25rem 3rem; }
+}
+@media (max-width: 600px) {
+ main[class*="docMainContainer"] > .container { padding-inline: 1rem; }
+}
+
+.ip-family-support { display: inline-block; white-space: nowrap; font-size: 1.15rem; font-weight: 600; letter-spacing: 0; color: #245750; }

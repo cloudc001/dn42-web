@@ -40,7 +40,7 @@ export default function Home() {
       </div></header>
 
       <section className={styles.section} id="nodes"><div className="container">
-        <SectionHeading eyebrow="GLOBAL PRESENCE" title="Connected across regions">An illustrative view of CloudC’s DN42 points of presence.</SectionHeading>
+        <SectionHeading eyebrow="GLOBAL PRESENCE" title="Connected across regions">An illustrative view of CloudC’s DN42 points of presence, including the migrated AU node. Regional markers are not exact datacenter locations.</SectionHeading>
         <div className={styles.globeLayout}>
           <NetworkGlobe nodes={networkNodes} />
           <aside className={styles.communityPanel} aria-labelledby="communities-title">
@@ -66,14 +66,15 @@ export default function Home() {
         <div className={styles.policyList}>
           <div><span>01</span><p><strong>WireGuard only</strong><br />One tunnel per peering session.</p></div>
           <div><span>02</span><p><strong>Long-term reachability</strong><br />Sessions may be removed after extended downtime.</p></div>
-          <div><span>03</span><p><strong>Port convention</strong><br />Default is 2 + the last four digits of your ASN.</p></div>
+          <div><span>03</span><p><strong>Port convention</strong><br />Prefix the last four digits of your ASN with 2 (e.g. 1816 → 21816).</p></div>
         </div>
       </div></section>
 
       <section className={styles.section} id="operations"><div className={`container ${styles.toolsRow}`}>
-        <div><SectionHeading eyebrow="OPERATIONS" title="Network tools" /><p className={styles.bodyCopy}>Best-effort experimental network. No commercial SLA.</p></div>
+        <div><SectionHeading eyebrow="OPERATIONS" title="Network tools" /><p className={styles.bodyCopy}>HK and US provide the route-reflector core. Check Looking Glass for current BGP sessions and Grafana for traffic, reachability and peer stability. Best-effort experimental network; no commercial SLA.</p></div>
         <div className={styles.toolLinks}>
           <a href="https://lg.dn42.cloudc.dev"><span>DN42 Looking Glass</span><b aria-hidden="true">↗</b></a>
+          <a href="https://grafana.dn42.cloudc.dev/d/dn42-unified-observatory/dn42-unified-observatory"><span>Grafana monitoring</span><b aria-hidden="true">↗</b></a>
           <a href="https://status.cloudc.dev"><span>Service status</span><b aria-hidden="true">↗</b></a>
         </div>
       </div></section>

@@ -2,11 +2,11 @@ import React, {useEffect, useRef, useState} from 'react';
 import * as THREE from 'three';
 import {geoEquirectangular, geoGraticule10, geoPath} from 'd3-geo';
 import {feature} from 'topojson-client';
-import worldAtlas from 'world-atlas/countries-110m.json';
+import worldAtlas from 'world-atlas/countries-50m.json';
 import styles from './NetworkGlobe.module.css';
 
 const radius = 1.42;
-const routePairs = [['US', 'JP'], ['JP', 'SG'], ['SG', 'HK'], ['HK', 'DE'], ['DE', 'US'], ['CN', 'HK']];
+const routePairs = [['HK', 'US'], ['HK', 'JP'], ['US', 'JP'], ['HK', 'SG'], ['US', 'SG'], ['HK', 'DE'], ['US', 'DE'], ['HK', 'AU'], ['US', 'AU'], ['HK', 'UK'], ['US', 'UK'], ['CN', 'HK']];
 
 function toGlobePosition([longitude, latitude], distance = radius) {
   const longitudeRadians = THREE.MathUtils.degToRad(longitude);
@@ -15,7 +15,8 @@ function toGlobePosition([longitude, latitude], distance = radius) {
   return new THREE.Vector3(
     distance * latitudeScale * Math.cos(longitudeRadians),
     distance * Math.sin(latitudeRadians),
-    distance * latitudeScale * Math.sin(longitudeRadians),
+    // SphereGeometry UV: east-positive longitude runs toward negative Z.
+    -distance * latitudeScale * Math.sin(longitudeRadians),
   );
 }
 
@@ -234,7 +235,7 @@ function NetworkGlobe({nodes}) {
 
   return <div className={styles.globeModule}>
     <div className={styles.globeToolbar}>
-      <span>AS4242423777 <i /> 6 points of presence</span>
+      <span>AS4242423777 <i /> {nodes.length} listed locations</span>
       <button type="button" onClick={() => setIsPlaying((playing) => !playing)} aria-pressed={isPlaying} aria-label={isPlaying ? 'Pause globe animation' : 'Resume globe animation'}>
         {isPlaying ? 'Pause' : 'Resume'}
       </button>
