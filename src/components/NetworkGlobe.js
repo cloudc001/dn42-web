@@ -241,8 +241,8 @@ function NetworkGlobe({nodes}) {
       </button>
     </div>
     <div className={styles.globe} ref={hostRef} />
-    <div className={styles.locationList} aria-label="Network locations">
-      {nodes.map((node) => <span key={node.code}><b>{node.code}</b> {node.location}</span>)}
+    <div className={styles.locationList} aria-label="Node codes">
+      {nodes.map((node) => <span key={node.code}><b>{node.code}</b></span>)}
     </div>
     <p className={styles.globeNote}>Illustrative routes · not live traffic or status data</p>
   </div>;

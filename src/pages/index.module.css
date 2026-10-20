@@ -25,7 +25,7 @@
 .sectionHeading .eyebrow { margin-bottom: 7px; }
 .sectionHeading h2, .contact h2 { margin: 0; font-size: 1.75rem; line-height: 1.2; font-weight: 740; }
 .sectionDescription { max-width: 710px; margin: 10px 0 0; color: #5f6e7a; }
-.globeLayout { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(270px, 0.65fr); gap: 42px; align-items: start; }
+.globeLayout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(270px, 0.85fr); gap: 32px; align-items: start; }
 .communityPanel { min-width: 0; padding: 12px 0 0 30px; border-left: 1px solid #d9e2ea; }
 .communityPanel > .eyebrow { margin-bottom: 7px; }
 .communityPanel h3 { margin: 0; color: #17202a; font-size: 1.4rem; font-weight: 740; }
