@@ -33,13 +33,13 @@ CN nodes do not peer with nodes outside mainland China. Do not use them for unla
 
 | Node | Location | Endpoint | IPv4 / IPv6 | DN42 IPv4 | DN42 IPv6 | WireGuard key |
 | --- | --- | --- | --- | --- | --- | --- |
-| US | United States | `us.dn42.cloudc.dev` | <span className="ip-family-support" title="Public endpoint IPv4 / IPv6">○/×</span> | `172.22.107.5` | `fdbb:aee:d9bd::5` | <CopyPublicKey node="US" value="H7LRdH2HlvsKM/ftF7CEHIja8AnFV5c5tYJ1OSyrlnQ=" /> |
-| JP | Japan | `jp.dn42.cloudc.dev` | <span className="ip-family-support" title="Public endpoint IPv4 / IPv6">○/○</span> | `172.22.107.2` | `fdbb:aee:d9bd::2` | <CopyPublicKey node="JP" value="TRsJBPvVUXBCDuiBDwte+YCbkjkIglfVm+M5NxOFfwk=" /> |
-| SG | Singapore | `sg.dn42.cloudc.dev` | <span className="ip-family-support" title="Public endpoint IPv4 / IPv6">○/○</span> | `172.22.107.3` | `fdbb:aee:d9bd::3` | <CopyPublicKey node="SG" value="EPgqX4UDrzirYgPbDf3t6+6XBWozuUEg4L2zWcPO5Xk=" /> |
-| HK | Hong Kong | `hk.dn42.cloudc.dev` | <span className="ip-family-support" title="Public endpoint IPv4 / IPv6">○/○</span> | `172.22.107.1` | `fdbb:aee:d9bd::1` | <CopyPublicKey node="HK" value="ZynDjBdOWAS1YjZzwdiSI4kbthisE2xgPiOHopdfIxQ=" /> |
-| DE | Germany | `de.dn42.cloudc.dev` | <span className="ip-family-support" title="Public endpoint IPv4 / IPv6">○/○</span> | `172.22.107.7` | `fdbb:aee:d9bd::7` | <CopyPublicKey node="DE" value="yJy4AxORf1c2VNvmVCzM9HYd6+xru17rc/N+946PODQ=" /> |
-| AU | Australia | `au.dn42.cloudc.dev` | <span className="ip-family-support" title="Public endpoint IPv4 / IPv6">○/×</span> | `172.22.107.4` | `fdbb:aee:d9bd::4` | <CopyPublicKey node="AU" value="dWOQkOyFT7VeHzh/8DNnlMIwqLPBh0/Daj6MdOdR9BQ=" /> |
-| UK | United Kingdom | `uk.dn42.cloudc.dev` | <span className="ip-family-support" title="Public endpoint IPv4 / IPv6">○/×</span> | `172.22.107.6` | `fdbb:aee:d9bd::6` | <CopyPublicKey node="UK" value="b9BF2pBj3Uk958jzSUIIPzKN2DLpED/JldkSo4S+VAM=" /> |
+| US | United States | `us.dn42.cloudc.dev` | <span className="ip-family-support" title="IPv4 / IPv6 support">○/○</span> | `172.22.107.5` | `fdbb:aee:d9bd::5` | <CopyPublicKey node="US" value="H7LRdH2HlvsKM/ftF7CEHIja8AnFV5c5tYJ1OSyrlnQ=" /> |
+| JP | Japan | `jp.dn42.cloudc.dev` | <span className="ip-family-support" title="IPv4 / IPv6 support">○/○</span> | `172.22.107.2` | `fdbb:aee:d9bd::2` | <CopyPublicKey node="JP" value="TRsJBPvVUXBCDuiBDwte+YCbkjkIglfVm+M5NxOFfwk=" /> |
+| SG | Singapore | `sg.dn42.cloudc.dev` | <span className="ip-family-support" title="IPv4 / IPv6 support">○/○</span> | `172.22.107.3` | `fdbb:aee:d9bd::3` | <CopyPublicKey node="SG" value="EPgqX4UDrzirYgPbDf3t6+6XBWozuUEg4L2zWcPO5Xk=" /> |
+| HK | Hong Kong | `hk.dn42.cloudc.dev` | <span className="ip-family-support" title="IPv4 / IPv6 support">○/○</span> | `172.22.107.1` | `fdbb:aee:d9bd::1` | <CopyPublicKey node="HK" value="ZynDjBdOWAS1YjZzwdiSI4kbthisE2xgPiOHopdfIxQ=" /> |
+| DE | Germany | `de.dn42.cloudc.dev` | <span className="ip-family-support" title="IPv4 / IPv6 support">×/○</span> | `172.22.107.7` | `fdbb:aee:d9bd::7` | <CopyPublicKey node="DE" value="yJy4AxORf1c2VNvmVCzM9HYd6+xru17rc/N+946PODQ=" /> |
+| AU | Australia | `au.dn42.cloudc.dev` | <span className="ip-family-support" title="IPv4 / IPv6 support">○/×</span> | `172.22.107.4` | `fdbb:aee:d9bd::4` | <CopyPublicKey node="AU" value="dWOQkOyFT7VeHzh/8DNnlMIwqLPBh0/Daj6MdOdR9BQ=" /> |
+| UK | United Kingdom | `uk.dn42.cloudc.dev` | <span className="ip-family-support" title="IPv4 / IPv6 support">○/○</span> | `172.22.107.6` | `fdbb:aee:d9bd::6` | <CopyPublicKey node="UK" value="b9BF2pBj3Uk958jzSUIIPzKN2DLpED/JldkSo4S+VAM=" /> |
 | CN | Mainland China | By request | - | `172.22.107.8` | `fdbb:aee:d9bd::8` | - |
 
 IPv4 / IPv6 refers to the public endpoint address families, not the DN42 addresses: ○ = published A/AAAA record; × = no published record for that family. CN availability is provided on request. You can force IPv4 or IPv6 by prefixing the domain name with 4. or 6., for example 6.jp.dn42.cloudc.dev. This depends on the corresponding DNS record being published and is not a live reachability test.
