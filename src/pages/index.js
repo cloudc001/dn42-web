@@ -81,7 +81,7 @@ export default function Home() {
 
       <section className={styles.contact} id="contact"><div className={`container ${styles.contactInner}`}>
         <div><p className={styles.eyebrow}>PEERING &amp; OPERATIONS</p><h2>Get in touch</h2><p>Telegram is preferred. Email replies are usually sent within 24 hours.</p></div>
-        <div className={styles.contactLinks}><a href="https://cloudc001.t.me">Telegram <span aria-hidden="true">↗</span></a><a href="mailto:cloud001@outlook.com">cloud001@outlook.com <span aria-hidden="true">↗</span></a></div>
+        <div className={styles.contactLinks}><a href="https://cloudc001.t.me">Telegram <span aria-hidden="true">↗</span></a><a href="mailto:cloud001@outlook.com">cloud001@outlook.com <span aria-hidden="true">↗</span></a><a href="tel:+042437771001" title="Telephony42 / DN42 network number">Telephony42: +042437771001 <span aria-hidden="true">↗</span></a></div>
       </div></section>
     </main>
   </Layout>;
