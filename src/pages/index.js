@@ -76,7 +76,7 @@ export default function Home() {
         <div className={styles.toolLinks}>
           <a href="https://lg.dn42.cloudc.dev"><span>DN42 Looking Glass</span><b aria-hidden="true">↗</b></a>
           <a href="https://grafana.dn42.cloudc.dev/d/dn42-unified-observatory/dn42-unified-observatory"><span>Grafana monitoring</span><b aria-hidden="true">↗</b></a>
-          <a href="https://status.cloudc.dev"><span>Service status</span><b aria-hidden="true">↗</b></a>
+          <a href="https://t.me/cloudc001bot"><span>Auto peer</span><b aria-hidden="true">↗</b></a>
         </div>
       </div></section>
 
