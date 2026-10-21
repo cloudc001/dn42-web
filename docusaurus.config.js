@@ -1,4 +1,4 @@
-﻿const lightCodeTheme = require('prism-react-renderer/themes/github');
+const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 // With JSDoc @type annotations, IDEs can provide config autocompletion
@@ -13,6 +13,14 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
   favicon: 'img/favicon.ico',
   organizationName: 'cloudc001', // Usually your GitHub org/user name.
   projectName: 'dn42-web', // Usually your repo name.
+
+  scripts: [
+    {
+      src: 'https://umami.cloudc.dev/script.js',
+      defer: true,
+      'data-website-id': '71b2721e-6ba6-40e5-b1dd-1193e090d333',
+    },
+  ],
 
   presets: [
     [
