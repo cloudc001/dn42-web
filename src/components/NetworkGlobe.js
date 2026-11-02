@@ -6,7 +6,7 @@ import worldAtlas from 'world-atlas/countries-50m.json';
 import styles from './NetworkGlobe.module.css';
 
 const radius = 1.42;
-const routePairs = [['HK', 'US'], ['HK', 'JP'], ['US', 'JP'], ['HK', 'SG'], ['US', 'SG'], ['HK', 'DE'], ['US', 'DE'], ['HK', 'AU'], ['US', 'AU'], ['HK', 'UK'], ['US', 'UK'], ['CN', 'HK']];
+const routePairs = [['HK', 'US'], ['HK', 'JP'], ['US', 'JP'], ['HK', 'SG'], ['US', 'SG'], ['HK', 'DE'], ['US', 'DE'], ['HK', 'CA'], ['US', 'CA'], ['HK', 'UK'], ['US', 'UK'], ['CN', 'HK']];
 
 function toGlobePosition([longitude, latitude], distance = radius) {
   const longitudeRadians = THREE.MathUtils.degToRad(longitude);
