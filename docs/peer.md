@@ -23,7 +23,7 @@ For self-service peering, use the [CloudC001 Telegram bot](https://t.me/cloudc00
 - WireGuard tunnels only.
 - Multiprotocol BGP with Extended Next Hop and IPv6 link-local addressing is preferred. Other configurations are available on request.
 - The default WireGuard port number consists of the digit 2 followed by the last four digits of your ASN. For example, ASN 4242421816 uses port 21816. Contact me if you need a different port.
-- Use the endpoint listed below. IPv4-only or IPv6-only aliases are available only where configured; confirm them before use. CA currently uses `au.dn42.cloudc.dev`.
+- Use the endpoint listed below. IPv4-only or IPv6-only aliases are available only where configured; confirm them before use. CA currently uses `ca.dn42.cloudc.dev`.
 - A session may be removed if it remains unreachable for an extended period.
 - Please keep latency below 50 ms where possible.
 
@@ -38,7 +38,7 @@ CN nodes do not peer with nodes outside mainland China. Do not use them for unla
 | HK | Hong Kong | `hk.dn42.cloudc.dev` | <span className="ip-family-support" title="IPv4 / IPv6 support">○/○</span> | `172.22.107.1` | `fdbb:aee:d9bd::1` | <CopyPublicKey node="HK" value="ZynDjBdOWAS1YjZzwdiSI4kbthisE2xgPiOHopdfIxQ=" /> |
 | JP | Tokyo, Japan | `jp.dn42.cloudc.dev` | <span className="ip-family-support" title="IPv4 / IPv6 support">○/○</span> | `172.22.107.2` | `fdbb:aee:d9bd::2` | <CopyPublicKey node="JP" value="TRsJBPvVUXBCDuiBDwte+YCbkjkIglfVm+M5NxOFfwk=" /> |
 | SG | Singapore | `sg.dn42.cloudc.dev` | <span className="ip-family-support" title="IPv4 / IPv6 support">○/○</span> | `172.22.107.3` | `fdbb:aee:d9bd::3` | <CopyPublicKey node="SG" value="EPgqX4UDrzirYgPbDf3t6+6XBWozuUEg4L2zWcPO5Xk=" /> |
-| CA | Canada | `au.dn42.cloudc.dev` | <span className="ip-family-support" title="IPv4 / IPv6 support">○/×</span> | `172.22.107.4` | `fdbb:aee:d9bd::4` | <CopyPublicKey node="CA" value="dWOQkOyFT7VeHzh/8DNnlMIwqLPBh0/Daj6MdOdR9BQ=" /> |
+| CA | Canada | `ca.dn42.cloudc.dev` | <span className="ip-family-support" title="IPv4 / IPv6 support">○/×</span> | `172.22.107.4` | `fdbb:aee:d9bd::4` | <CopyPublicKey node="CA" value="dWOQkOyFT7VeHzh/8DNnlMIwqLPBh0/Daj6MdOdR9BQ=" /> |
 | US | Fremont, California | `us.dn42.cloudc.dev` | <span className="ip-family-support" title="IPv4 / IPv6 support">○/○</span> | `172.22.107.5` | `fdbb:aee:d9bd::5` | <CopyPublicKey node="US" value="H7LRdH2HlvsKM/ftF7CEHIja8AnFV5c5tYJ1OSyrlnQ=" /> |
 | UK | Maidenhead, England | `uk.dn42.cloudc.dev` | <span className="ip-family-support" title="IPv4 / IPv6 support">○/○</span> | `172.22.107.6` | `fdbb:aee:d9bd::6` | <CopyPublicKey node="UK" value="b9BF2pBj3Uk958jzSUIIPzKN2DLpED/JldkSo4S+VAM=" /> |
 | DE(NAT) | Falkenstein, Saxony | `de.dn42.cloudc.dev` | <span className="ip-family-support" title="IPv4 / IPv6 support">×/○</span> | `172.22.107.7` | `fdbb:aee:d9bd::7` | <CopyPublicKey node="DE" value="yJy4AxORf1c2VNvmVCzM9HYd6+xru17rc/N+946PODQ=" /> |
@@ -52,7 +52,7 @@ All nodes use ASN `4242423777` and link-local address `fe80::3777`.
 
 HK and US act as route reflectors. The other listed overseas nodes connect to both route reflectors; WireGuard provides the tunnel transport and OSPF provides internal reachability.
 
-The former TH node has moved to Canada and is now identified as CA. Its internal addresses remain `172.22.107.4` and `fdbb:aee:d9bd::4`. Use `au.dn42.cloudc.dev`, not the retired TH hostname.
+The former TH node has moved to Canada and is now identified as CA. Its internal addresses remain `172.22.107.4` and `fdbb:aee:d9bd::4`. Use `ca.dn42.cloudc.dev`, not the retired TH hostname.
 
 Confirm the endpoint, hosting provider, and supported address families when arranging a session. Map markers are regional illustrations, not exact datacenter locations. Live session status is available in Looking Glass and Grafana; this document is not a live availability report.
 

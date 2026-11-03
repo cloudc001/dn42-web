@@ -4,7 +4,7 @@ const networkNodes = [
   {location: 'Singapore', country: 'Singapore', code: 'SG', provider: 'Details on request', endpoint: 'sg.dn42.cloudc.dev', ipv4: '172.22.107.3', ipv6: 'fdbb:aee:d9bd::3', coordinates: [103.8198, 1.3521]},
   {location: 'Hong Kong', country: 'Hong Kong', code: 'HK', provider: 'Details on request', endpoint: 'hk.dn42.cloudc.dev', ipv4: '172.22.107.1', ipv6: 'fdbb:aee:d9bd::1', coordinates: [114.1694, 22.3193]},
   {location: 'Falkenstein, Saxony', country: 'Germany', code: 'DE', provider: 'Details on request', endpoint: 'de.dn42.cloudc.dev', ipv4: '172.22.107.7', ipv6: 'fdbb:aee:d9bd::7', coordinates: [12.3716,50.4779]},
-  {location: 'Canada', country: 'Canada', code: 'CA', provider: 'Details on request', endpoint: 'au.dn42.cloudc.dev', ipv4: '172.22.107.4', ipv6: 'fdbb:aee:d9bd::4', coordinates: [-106.3, 56.1]},
+  {location: 'Canada', country: 'Canada', code: 'CA', provider: 'Details on request', endpoint: 'ca.dn42.cloudc.dev', ipv4: '172.22.107.4', ipv6: 'fdbb:aee:d9bd::4', coordinates: [-106.3, 56.1]},
   {location: 'Maidenhead, England', country: 'United Kingdom', code: 'UK', provider: 'Details on request', endpoint: 'uk.dn42.cloudc.dev', ipv4: '172.22.107.6', ipv6: 'fdbb:aee:d9bd::6', coordinates: [-0.7199,51.5228]},
   {location: 'Mainland China', country: 'China', code: 'CN', provider: 'Details on request', endpoint: 'By request', ipv4: '172.22.107.8', ipv6: 'fdbb:aee:d9bd::8', coordinates: [117.01, 36.38]},
 ];
