@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import * as THREE from 'three';
+import {TrackballControls} from 'three/examples/jsm/controls/TrackballControls.js';
 import {geoEquirectangular, geoGraticule10, geoPath} from 'd3-geo';
 import {feature} from 'topojson-client';
 import worldAtlas from 'world-atlas/countries-50m.json';
@@ -82,6 +83,7 @@ function createAtmosphereMaterial() {
 
 function NetworkGlobe({nodes}) {
   const hostRef = useRef(null);
+  const controlsRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const isPlayingRef = useRef(isPlaying);
 
@@ -107,9 +109,38 @@ function NetworkGlobe({nodes}) {
     renderer.domElement.setAttribute('aria-label', 'Illustrated DN42 node locations and routes. This is not live traffic or a status map.');
     host.appendChild(renderer.domElement);
 
+    const controls = new TrackballControls(camera, renderer.domElement);
+    controls.noPan = true;
+    controls.rotateSpeed = 2.5;
+    controls.zoomSpeed = 1.0;
+    controls.minDistance = 3.5;
+    controls.maxDistance = 9;
+    controls.staticMoving = false;
+    controls.dynamicDampingFactor = 0.12;
+    controls.keys = [];
+    controlsRef.current = controls;
+    const stopAutoRotation = () => { isPlayingRef.current = false; setIsPlaying(false); };
+    controls.addEventListener('start', stopAutoRotation);
+    renderer.domElement.tabIndex = 0;
+    renderer.domElement.setAttribute('aria-label', 'Interactive DN42 globe. Drag to rotate freely; scroll to zoom. Illustrative routes, not live status.');
+    const onKeyDown = (event) => {
+      if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', '+', '=', '-', 'Home'].includes(event.key)) return;
+      event.preventDefault(); stopAutoRotation();
+      if (event.key === 'Home') { controls.reset(); globeGroup.rotation.set(0, 0, 0); }
+      else if (['+', '=', '-'].includes(event.key)) camera.position.multiplyScalar(event.key === '-' ? 1.1 : 0.9).clampLength(3.5, 9);
+      else {
+        const axis = new THREE.Vector3(event.key === 'ArrowUp' || event.key === 'ArrowDown' ? 1 : 0, event.key === 'ArrowLeft' || event.key === 'ArrowRight' ? 1 : 0, 0).applyQuaternion(camera.quaternion);
+        camera.position.applyAxisAngle(axis, event.key === 'ArrowLeft' || event.key === 'ArrowUp' ? 0.12 : -0.12);
+      }
+      controls.update();
+    };
+    renderer.domElement.addEventListener('keydown', onKeyDown);
+
     const globeGroup = new THREE.Group();
     globeGroup.rotation.y = 0;
     scene.add(globeGroup);
+    const resetView = () => { controls.reset(); globeGroup.rotation.set(0, 0, 0); stopAutoRotation(); };
+    controlsRef.current = {reset: resetView};
 
     const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x628b8a, 0.9);
     scene.add(hemisphereLight);
@@ -190,7 +221,7 @@ function NetworkGlobe({nodes}) {
       width = bounds.width;
       height = bounds.height;
       camera.aspect = width / height;
-      camera.position.z = width < 480 ? 5.6 : 5.15;
+      controls.handleResize();
       camera.updateProjectionMatrix();
       renderer.setSize(width, height, false);
       renderer.render(scene, camera);
@@ -215,6 +246,7 @@ function NetworkGlobe({nodes}) {
           flow.position.copy(curve.getPoint((elapsed * 0.045 + offset) % 1));
         });
       }
+      controls.update();
       if (width && height) renderer.render(scene, camera);
     };
     frameId = requestAnimationFrame(renderFrame);
@@ -222,6 +254,10 @@ function NetworkGlobe({nodes}) {
     return () => {
       cancelAnimationFrame(frameId);
       resizeObserver.disconnect();
+      controls.removeEventListener('start', stopAutoRotation);
+      renderer.domElement.removeEventListener('keydown', onKeyDown);
+      controls.dispose();
+      controlsRef.current = null;
       scene.traverse((object) => {
         object.geometry?.dispose();
         if (Array.isArray(object.material)) object.material.forEach((material) => material.dispose());
@@ -236,15 +272,16 @@ function NetworkGlobe({nodes}) {
   return <div className={styles.globeModule}>
     <div className={styles.globeToolbar}>
       <span>AS4242423777 <i /> {nodes.length} listed locations</span>
+      <div className={styles.actions}><button type="button" onClick={() => { controlsRef.current?.reset(); }} aria-label="Reset globe view">Reset view</button>
       <button type="button" onClick={() => setIsPlaying((playing) => !playing)} aria-pressed={isPlaying} aria-label={isPlaying ? 'Pause globe animation' : 'Resume globe animation'}>
         {isPlaying ? 'Pause' : 'Resume'}
-      </button>
+      </button></div>
     </div>
     <div className={styles.globe} ref={hostRef} />
     <div className={styles.locationList} aria-label="Node codes">
       {nodes.map((node) => <span key={node.code}><b>{node.code}</b></span>)}
     </div>
-    <p className={styles.globeNote}>Illustrative routes · not live traffic or status data</p>
+    <p className={styles.globeNote}>Drag to rotate · Scroll or pinch to zoom · Illustrative routes, not live status</p>
   </div>;
 }
 

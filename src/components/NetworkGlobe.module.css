@@ -15,3 +15,8 @@
   .globe { height: 340px; }
   .locationList { column-gap: 12px; font-size: 0.72rem; }
 }
+
+.actions { display: flex; gap: 6px; flex-shrink: 0; }
+.canvas { cursor: grab; touch-action: none; }
+.canvas:active { cursor: grabbing; }
+.canvas:focus-visible { outline: 2px solid #245fc9; outline-offset: 3px; border-radius: 8px; }
