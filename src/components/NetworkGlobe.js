@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import * as THREE from 'three';
 import {TrackballControls} from 'three/examples/jsm/controls/TrackballControls.js';
-import {geoEquirectangular, geoGraticule10, geoPath} from 'd3-geo';
+import {geoEquirectangular, geoGraticule10, geoPath, geoCentroid, geoArea} from 'd3-geo';
 import {feature} from 'topojson-client';
 import worldAtlas from 'world-atlas/countries-50m.json';
 import styles from './NetworkGlobe.module.css';
@@ -22,8 +22,8 @@ function toGlobePosition([longitude, latitude], distance = radius) {
 }
 
 function createWorldTexture() {
-  const width = 2048;
-  const height = 1024;
+  const width = 4096;
+  const height = 2048;
   const canvas = document.createElement('canvas');
   canvas.width = width;
   canvas.height = height;
@@ -46,6 +46,30 @@ function createWorldTexture() {
   context.strokeStyle = 'rgba(80, 128, 132, 0.24)';
   context.lineWidth = 1;
   context.stroke();
+
+  // Country names are part of the globe texture: rear-side labels stay occluded.
+  const labelBoxes = [];
+  context.textAlign = 'center';
+  context.textBaseline = 'middle';
+  context.font = '500 21px system-ui, sans-serif';
+  context.lineJoin = 'round';
+  const countries = feature(worldAtlas, worldAtlas.objects.countries).features
+    .sort((a, b) => geoArea(b) - geoArea(a));
+  countries.forEach((country) => {
+    if (geoArea(country) < 0.0008 || country.properties.name === 'Antarctica') return;
+    const center = projection(geoCentroid(country));
+    if (!center || !center.every(Number.isFinite)) return;
+    const name = country.properties.name;
+    const textWidth = context.measureText(name).width;
+    const box = {x: center[0] - textWidth / 2 - 5, y: center[1] - 13, w: textWidth + 10, h: 26};
+    if (labelBoxes.some((b) => box.x < b.x + b.w && box.x + box.w > b.x && box.y < b.y + b.h && box.y + box.h > b.y)) return;
+    labelBoxes.push(box);
+    context.strokeStyle = 'rgba(230, 239, 238, 0.92)';
+    context.lineWidth = 4;
+    context.strokeText(name, center[0], center[1]);
+    context.fillStyle = '#285b59';
+    context.fillText(name, center[0], center[1]);
+  });
 
   const texture = new THREE.CanvasTexture(canvas);
   texture.colorSpace = THREE.SRGBColorSpace;
@@ -91,9 +115,7 @@ function NetworkGlobe({nodes}) {
     isPlayingRef.current = isPlaying;
   }, [isPlaying]);
 
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) setIsPlaying(false);
-  }, []);
+
 
   useEffect(() => {
     const host = hostRef.current;
@@ -115,12 +137,21 @@ function NetworkGlobe({nodes}) {
     controls.zoomSpeed = 1.0;
     controls.minDistance = 3.5;
     controls.maxDistance = 9;
-    controls.staticMoving = false;
-    controls.dynamicDampingFactor = 0.12;
+    controls.staticMoving = true;
+    controls.dynamicDampingFactor = 0;
     controls.keys = [];
     controlsRef.current = controls;
     const stopAutoRotation = () => { isPlayingRef.current = false; setIsPlaying(false); };
-    controls.addEventListener('start', stopAutoRotation);
+    let dragStart = null;
+    const onPointerDown = (event) => { dragStart = {x: event.clientX, y: event.clientY}; };
+    const onPointerMove = (event) => {
+      if (dragStart && Math.hypot(event.clientX - dragStart.x, event.clientY - dragStart.y) > 3) stopAutoRotation();
+    };
+    const onPointerUp = () => { dragStart = null; };
+    renderer.domElement.addEventListener('pointerdown', onPointerDown);
+    renderer.domElement.addEventListener('pointermove', onPointerMove);
+    window.addEventListener('pointerup', onPointerUp);
+    window.addEventListener('pointercancel', onPointerUp);
     renderer.domElement.tabIndex = 0;
     renderer.domElement.setAttribute('aria-label', 'Interactive DN42 globe. Drag to rotate freely; scroll to zoom. Illustrative routes, not live status.');
     const onKeyDown = (event) => {
@@ -139,7 +170,7 @@ function NetworkGlobe({nodes}) {
     const globeGroup = new THREE.Group();
     globeGroup.rotation.y = 0;
     scene.add(globeGroup);
-    const resetView = () => { controls.reset(); globeGroup.rotation.set(0, 0, 0); stopAutoRotation(); };
+    const resetView = () => { controls.reset(); globeGroup.rotation.set(0, 0, 0); };
     controlsRef.current = {reset: resetView};
 
     const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x628b8a, 0.9);
@@ -254,7 +285,10 @@ function NetworkGlobe({nodes}) {
     return () => {
       cancelAnimationFrame(frameId);
       resizeObserver.disconnect();
-      controls.removeEventListener('start', stopAutoRotation);
+      renderer.domElement.removeEventListener('pointerdown', onPointerDown);
+      renderer.domElement.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerup', onPointerUp);
+      window.removeEventListener('pointercancel', onPointerUp);
       renderer.domElement.removeEventListener('keydown', onKeyDown);
       controls.dispose();
       controlsRef.current = null;
@@ -273,7 +307,7 @@ function NetworkGlobe({nodes}) {
     <div className={styles.globeToolbar}>
       <span>AS4242423777 <i /> {nodes.length} listed locations</span>
       <div className={styles.actions}><button type="button" onClick={() => { controlsRef.current?.reset(); }} aria-label="Reset globe view">Reset view</button>
-      <button type="button" onClick={() => setIsPlaying((playing) => !playing)} aria-pressed={isPlaying} aria-label={isPlaying ? 'Pause globe animation' : 'Resume globe animation'}>
+      <button type="button" onClick={() => { const next = !isPlayingRef.current; isPlayingRef.current = next; setIsPlaying(next); }} aria-pressed={isPlaying} aria-label={isPlaying ? 'Pause globe animation' : 'Resume globe animation'}>
         {isPlaying ? 'Pause' : 'Resume'}
       </button></div>
     </div>
