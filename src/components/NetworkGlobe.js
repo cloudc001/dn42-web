@@ -1,9 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import * as THREE from 'three';
 import {TrackballControls} from 'three/examples/jsm/controls/TrackballControls.js';
-import {geoEquirectangular, geoGraticule10, geoPath, geoCentroid, geoArea} from 'd3-geo';
-import {feature} from 'topojson-client';
-import worldAtlas from 'world-atlas/countries-50m.json';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './NetworkGlobe.module.css';
 
 const radius = 1.42;
@@ -19,62 +17,6 @@ function toGlobePosition([longitude, latitude], distance = radius) {
     // SphereGeometry UV: east-positive longitude runs toward negative Z.
     -distance * latitudeScale * Math.sin(longitudeRadians),
   );
-}
-
-function createWorldTexture() {
-  const width = 4096;
-  const height = 2048;
-  const canvas = document.createElement('canvas');
-  canvas.width = width;
-  canvas.height = height;
-  const context = canvas.getContext('2d');
-  context.fillStyle = '#c7dadd';
-  context.fillRect(0, 0, width, height);
-
-  const projection = geoEquirectangular().scale(width / (2 * Math.PI)).translate([width / 2, height / 2]);
-  const path = geoPath(projection, context);
-  context.beginPath();
-  path(feature(worldAtlas, worldAtlas.objects.countries));
-  context.fillStyle = '#83aaa7';
-  context.fill();
-  context.strokeStyle = '#e6efee';
-  context.lineWidth = 1.2;
-  context.stroke();
-
-  context.beginPath();
-  path(geoGraticule10());
-  context.strokeStyle = 'rgba(80, 128, 132, 0.24)';
-  context.lineWidth = 1;
-  context.stroke();
-
-  // Country names are part of the globe texture: rear-side labels stay occluded.
-  const labelBoxes = [];
-  context.textAlign = 'center';
-  context.textBaseline = 'middle';
-  context.font = '500 21px system-ui, sans-serif';
-  context.lineJoin = 'round';
-  const countries = feature(worldAtlas, worldAtlas.objects.countries).features
-    .sort((a, b) => geoArea(b) - geoArea(a));
-  countries.forEach((country) => {
-    if (geoArea(country) < 0.0008 || country.properties.name === 'Antarctica') return;
-    const center = projection(geoCentroid(country));
-    if (!center || !center.every(Number.isFinite)) return;
-    const name = country.properties.name;
-    const textWidth = context.measureText(name).width;
-    const box = {x: center[0] - textWidth / 2 - 5, y: center[1] - 13, w: textWidth + 10, h: 26};
-    if (labelBoxes.some((b) => box.x < b.x + b.w && box.x + box.w > b.x && box.y < b.y + b.h && box.y + box.h > b.y)) return;
-    labelBoxes.push(box);
-    context.strokeStyle = 'rgba(230, 239, 238, 0.92)';
-    context.lineWidth = 4;
-    context.strokeText(name, center[0], center[1]);
-    context.fillStyle = '#285b59';
-    context.fillText(name, center[0], center[1]);
-  });
-
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.colorSpace = THREE.SRGBColorSpace;
-  texture.anisotropy = 4;
-  return texture;
 }
 
 function createAtmosphereMaterial() {
@@ -106,6 +48,7 @@ function createAtmosphereMaterial() {
 }
 
 function NetworkGlobe({nodes}) {
+  const textureUrl = useBaseUrl('/img/globe-countries-v1.webp');
   const hostRef = useRef(null);
   const controlsRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
@@ -182,20 +125,23 @@ function NetworkGlobe({nodes}) {
     fillLight.position.set(4, -2, 3);
     scene.add(fillLight);
 
-    const worldTexture = createWorldTexture();
+    // Pre-rendered map and labels avoid shipping/parsing atlas geometry on every visit.
+    const worldTexture = new THREE.TextureLoader().load(textureUrl);
+    worldTexture.colorSpace = THREE.SRGBColorSpace;
+    worldTexture.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
     const atmosphere = new THREE.Mesh(
-      new THREE.SphereGeometry(radius * 1.025, 64, 48),
+      new THREE.SphereGeometry(radius * 1.025, 40, 28),
       createAtmosphereMaterial(),
     );
     globeGroup.add(atmosphere);
     const globe = new THREE.Mesh(
-      new THREE.SphereGeometry(radius, 80, 64),
-      new THREE.MeshPhysicalMaterial({
+      new THREE.SphereGeometry(radius, 56, 40),
+      new THREE.MeshStandardMaterial({
         map: worldTexture,
         roughness: 0.78,
         metalness: 0.02,
-        clearcoat: 0.14,
-        clearcoatRoughness: 0.78,
+
+
       }),
     );
     globeGroup.add(globe);
@@ -228,7 +174,7 @@ function NetworkGlobe({nodes}) {
       const control = start.clone().add(end).normalize().multiplyScalar(radius + 0.34 + (index % 2) * 0.05);
       const curve = new THREE.QuadraticBezierCurve3(start, control, end);
       const line = new THREE.Mesh(
-        new THREE.TubeGeometry(curve, 64, 0.0045, 5, false),
+        new THREE.TubeGeometry(curve, 40, 0.0045, 4, false),
         new THREE.MeshBasicMaterial({color: '#36877f', transparent: true, opacity: 0.42, depthWrite: false}),
       );
       globeGroup.add(line);
@@ -301,7 +247,7 @@ function NetworkGlobe({nodes}) {
       renderer.dispose();
       renderer.domElement.remove();
     };
-  }, [nodes]);
+  }, [nodes, textureUrl]);
 
   return <div className={styles.globeModule}>
     <div className={styles.globeToolbar}>
